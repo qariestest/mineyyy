@@ -1,0 +1,9 @@
+Taruh file lagu kalian di folder ini dengan nama persis:
+
+  our-song.mp3
+
+Kalau file belum ada, tombol "Putar" di bagian "Our song" akan
+menampilkan pesan kecil bahwa lagunya belum ditambahkan — tidak error,
+website tetap jalan normal.
+
+Judul lagu & nama artis bisa diganti di js/config.js (bagian "song").

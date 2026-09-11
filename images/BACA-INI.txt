@@ -1,0 +1,19 @@
+Taruh 5 foto asli di folder ini, dengan NAMA FILE PERSIS seperti ini:
+
+  hero.jpg            -> foto utama, dipakai di bagian Hero (landscape lebih bagus)
+  first-date.jpg       -> foto section "Our little memories"
+  trip-01.jpg           -> foto section "Our little memories"
+  trip-02.jpg           -> foto section "Our little memories"
+  favorite-photo.jpg    -> dipakai di "Our little memories" DAN di bagian penutup (final)
+
+Format: .jpg atau .png semua boleh, tinggal sesuaikan ekstensi di js/config.js
+(cari heroImage, memories, final.image).
+
+Kalau foto belum ditaruh, website tetap jalan normal — akan muncul
+placeholder warna soft pink bertuliskan nama file yang perlu diganti,
+jadi kamu bisa lihat dulu layoutnya sebelum foto asli siap.
+
+Tips ukuran:
+- hero.jpg & favorite-photo.jpg: idealnya landscape, minimal 1600px lebar
+- first-date.jpg / trip-02.jpg: potrait atau square oke
+- trip-01.jpg: potrait lebih pas untuk layout kolase

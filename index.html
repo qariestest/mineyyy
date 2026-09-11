@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Untuk Yasmine — Empat Tahun Kita</title>
+<meta name="description" content="Sebuah surat cinta digital untuk Yasmine." />
+<meta name="theme-color" content="#f3e3d8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Scroll progress indicator -->
+<div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- Floating music player -->
+<div id="floatingPlayer" class="floating-player">
+  <button id="musicToggle" class="player-play-btn" type="button" aria-pressed="false" aria-label="Putar lagu kami">
+    <span id="playIcon" class="play-icon" aria-hidden="true">▶</span>
+  </button>
+  <div class="player-text">
+    <p class="player-title" id="playerTitle"></p>
+    <p class="player-artist" id="playerArtist"></p>
+  </div>
+  <div class="player-bars" id="playerBars" aria-hidden="true"><span></span><span></span><span></span></div>
+</div>
+
+<audio id="songAudio" preload="none"></audio>
+
+<!-- ============ OPENING SCREEN ============ -->
+<div id="opening" class="opening">
+  <div class="opening-particles" aria-hidden="true"></div>
+  <div class="opening-content">
+    <p class="opening-eyebrow">untuk kamu</p>
+    <p class="opening-line" id="openingLine"></p>
+    <button id="openButton" class="open-button" type="button">
+      <span id="openLabel"></span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ MAIN SITE ============ -->
+<main id="site" class="site" aria-hidden="true">
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-media">
+      <img id="heroImage" src="" alt="Foto Yasmine dan Gilang" onerror="handleImageError(this, 'hero.jpg', 'cover')" />
+      <div class="hero-scrim" aria-hidden="true"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-date" id="heroDate"></p>
+      <h1 class="hero-title" id="heroTitle"></h1>
+      <p class="hero-subtitle" id="heroSubtitle"></p>
+      <a href="#story" class="hero-cta" id="heroCta"></a>
+    </div>
+  </section>
+
+  <!-- OUR STORY -->
+  <section id="story" class="section story-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Bagaimana semuanya dimulai</p>
+      <h2 class="section-title reveal">Our story.</h2>
+      <ol class="timeline" id="timelineList"></ol>
+    </div>
+  </section>
+
+  <!-- MEMORIES -->
+  <section id="memories" class="section memories-section">
+    <div class="section-inner">
+      <p class="section-label reveal">Sekeping demi sekeping</p>
+      <h2 class="section-title reveal">Our little memories.</h2>
+      <div class="memory-grid" id="memoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- LOVE LETTER -->
+  <section id="letter" class="section letter-section">
+    <div class="section-inner section-inner--narrow">
+      <p class="section-label reveal">Baca pelan-pelan</p>
+      <h2 class="section-title reveal" id="letterTitle"></h2>
+      <div class="letter-paper reveal">
+        <p class="letter-body" id="letterBody"></p>
+        <p class="letter-signature" id="letterSignature"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THINGS I LOVE ABOUT YOU -->
+  <section id="reasons" class="section reasons-section">
+    <div class="section-inner section-inner--narrow">
+      <p class="section-label reveal">Sebagian kecil dari daftar panjang</p>
+      <h2 class="section-title reveal">Things I love about you.</h2>
+      <ol class="reasons-list" id="reasonsList"></ol>
+    </div>
+  </section>
+
+  <!-- SPECIAL SURPRISE -->
+  <section id="surprise" class="section surprise-section">
+    <div class="section-inner section-inner--narrow">
+      <p class="surprise-prompt reveal" id="surprisePrompt"></p>
+      <button id="surpriseButton" class="surprise-button reveal" type="button"></button>
+      <p class="surprise-reveal" id="surpriseReveal" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- SECRET INVITATION -->
+  <section id="invitation" class="section invitation-section">
+    <div class="section-inner section-inner--narrow">
+      <p class="section-label reveal">Satu kejutan lagi</p>
+      <h2 class="section-title reveal">Ada sedikit kejutan lagi buat kita.</h2>
+
+      <div class="invitation-card reveal" id="invitationCard" data-state="locked">
+
+        <div class="invitation-lock" id="invitationLockIcon" aria-hidden="true">🔒</div>
+        <p class="invitation-status" id="invitationStatus"></p>
+
+        <div class="invitation-countdown" id="invitationCountdown" aria-hidden="true">
+          <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-label">hari</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label">jam</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label">menit</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">detik</span></div>
+        </div>
+        <p class="sr-only" id="invitationSrCountdown" aria-live="polite"></p>
+
+        <div class="invitation-details" id="invitationDetails">
+          <div class="detail-row" id="detailEventTitle">
+            <span class="detail-label">Acara</span>
+            <span class="detail-value blurable" data-real=""></span>
+          </div>
+          <div class="detail-row" id="detailDate">
+            <span class="detail-label">Tanggal</span>
+            <span class="detail-value blurable" data-real=""></span>
+          </div>
+          <div class="detail-row" id="detailTime">
+            <span class="detail-label">Jam</span>
+            <span class="detail-value blurable" data-real=""></span>
+          </div>
+          <div class="detail-row" id="detailDress">
+            <span class="detail-label">Dress code</span>
+            <span class="detail-value blurable" data-real=""></span>
+          </div>
+          <div class="detail-row" id="detailLocation">
+            <span class="detail-label">Lokasi</span>
+            <span class="detail-value blurable" data-real=""></span>
+          </div>
+          <p class="invitation-message blurable" id="invitationMessage" data-real=""></p>
+        </div>
+
+        <button id="rsvpButton" class="rsvp-button" type="button" hidden></button>
+      </div>
+
+      <!-- Unlock cinematic overlay -->
+      <div class="unlock-overlay" id="unlockOverlay" aria-hidden="true">
+        <p class="unlock-text" id="unlockText"></p>
+        <p class="unlock-count" id="unlockCount"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL SECTION -->
+  <section id="final" class="section final-section">
+    <div class="final-media">
+      <img id="finalImage" src="" alt="Foto favorit berdua" onerror="handleImageError(this, 'favorite-photo.jpg', 'cover')" />
+      <div class="final-scrim" aria-hidden="true"></div>
+    </div>
+    <div class="final-content">
+      <p class="final-line reveal" id="finalLine1"></p>
+      <p class="final-line reveal" id="finalLine2"></p>
+      <h2 class="final-headline reveal" id="finalLine3"></h2>
+      <p class="final-signature reveal" id="finalSignature"></p>
+      <p class="final-date reveal" id="finalDate"></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto diperbesar" hidden>
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Tutup">✕</button>
+  <img id="lightboxImage" src="" alt="" />
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<!-- Toast Notification -->
+<div id="toastNotification" class="toast-notification" role="alert" aria-live="polite" hidden>
+  <p class="toast-message">Yuk buka secret invitation! 💌</p>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
